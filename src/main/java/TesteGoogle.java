@@ -1,5 +1,3 @@
-import javax.swing.JOptionPane;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
@@ -20,9 +18,16 @@ public class TesteGoogle {
 		//WebDriver driver = new ChromeDriver(); // Chrome
 		//WebDriver driver = new EdgeDriver(); // Edge
 		
+		
+		
+		
 		driver.get("http://www.google.com");
 		System.out.println(driver.getTitle());
 		Assert.assertEquals("Google", driver.getTitle());
+	}
+}
+
+/*
 		
 		JOptionPane.showMessageDialog(null,"Encerrando a Execução!");
 		
@@ -39,3 +44,5 @@ public class TesteGoogle {
 	}
 	
 }
+
+*/

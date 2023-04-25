@@ -1,5 +1,7 @@
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -134,8 +136,8 @@ public class TesteCampoTreinamento {
 	}
 	
 	@Test
-	@Ignore
-	public void checandoLinks() {
+	//@Ignore
+	public void checandoLinks() throws Exception {
 		
 		WebDriver driver = new FirefoxDriver(); // Firefox
 		
@@ -144,20 +146,49 @@ public class TesteCampoTreinamento {
 		driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
 		
 		driver.findElement(By.linkText("Voltar")).click();
-		System.out.println(driver.findElement(By.id("resultado")).getAttribute("value") );
+		System.out.println(driver.findElement(By.id("resultado")).getText());
 		
-		Assert.fail();
+		Assert.assertEquals("Voltou!", driver.findElement(By.id("resultado")).getText());
+		driver.close();
+		
+		Thread.sleep(3000);
+		//JOptionPane.showMessageDialog(null,"Encerrando a Execução!");
+
+
 		
 	}
 	
 	
+	@Test
+	//@Ignore
+	public void checandoTituloDaPagina() {
+		
+		WebDriver driver = new FirefoxDriver(); // Firefox
+		
+		// URL, Página do Projeto, acessada localmente, via arquivo HTML.
+		// System.getProperty("user.dir") é o "ApplicationPath" detectado automáticamente pela IDE Eclipse.
+		driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+		
+		//Capturando todo corpo da página ####################################
+		//System.out.println(driver.findElement(By.tagName("body")).getText());
+		
+		//Esse método funciona, porém não é performático à depender do tamanho da página
+/*
+		Assert.assertTrue(
+				driver.findElement(By.tagName("body"))
+				.getText()
+				.contains("Campo de Treinamento"));
+*/
+		
+		
+		
+		JOptionPane.showMessageDialog(null,"Encerrando a Execução!");
 	
-	
-	
+	}
 	
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void AbrirPagina () {
 		
 		WebDriver driver = new FirefoxDriver(); // Firefox
@@ -173,13 +204,14 @@ public class TesteCampoTreinamento {
 	private void closeSession () {
 		
 		try {
+			JOptionPane.showMessageDialog(null,"Encerrando a Execução!");
 			Runtime.getRuntime().exec("taskkill /F /IM Firefox.exe");
 			Runtime.getRuntime().exec("taskkill /F /IM geckodriver.exe"); // Encerrando processo com o Gecko WebDriver.
 			System.out.println( "Encerrando as Sessões" );
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		
 	}
 	
 }
